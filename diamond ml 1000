@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRITICAL SYSTEM ERROR</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background-color: #050505;
+            color: #ff3333;
+            font-family: 'Courier New', Courier, monospace;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 1000px;
+        }
+        
+        /* Efek Kamera Shake / Layar Bergetar */
+        @keyframes extreme-shake {
+            0% { transform: translate(0, 0) rotate(0deg); filter: hue-rotate(0deg); }
+            10% { transform: translate(-5px, 5px) rotate(-2deg); filter: hue-rotate(90deg); }
+            20% { transform: translate(5px, -5px) rotate(2deg); }
+            30% { transform: translate(-5px, -5px) rotate(0deg); }
+            40% { transform: translate(5px, 5px) rotate(2deg); filter: hue-rotate(180deg); }
+            50% { transform: translate(-5px, 5px) rotate(-1deg); }
+            60% { transform: translate(5px, -5px) rotate(1deg); }
+            70% { transform: translate(-5px, -5px) rotate(-2deg); filter: hue-rotate(270deg); }
+            80% { transform: translate(5px, 5px) rotate(0deg); }
+            90% { transform: translate(-5px, -5px) rotate(2deg); }
+            100% { transform: translate(0, 0) rotate(0deg); filter: hue-rotate(360deg); }
+        }
+        
+        .shake-active {
+            animation: extreme-shake 0.15s infinite;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 550px;
+            background: rgba(15, 5, 5, 0.95);
+            border: 3px solid #ff3333;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(255, 51, 51, 0.4);
+            border-radius: 8px;
+            z-index: 10;
+        }
+        
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px #ff3333;
+        }
+        
+        .warning-box {
+            border: 1px solid #ff3333;
+            background: rgba(255, 51, 51, 0.1);
+            padding: 15px;
+            margin-bottom: 25px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: #ffffff;
+            text-align: left;
+        }
+        
+        .input-group {
+            margin-top: 20px;
+        }
+        
+        input[type="password"] {
+            width: 100%;
+            padding: 12px 15px;
+            background: #000;
+            border: 2px solid #ff3333;
+            color: #fff;
+            font-size: 1.1rem;
+            text-align: center;
+            outline: none;
+            font-family: inherit;
+            margin-bottom: 15px;
+        }
+        
+        input[type="password"]:focus {
+            box-shadow: 0 0 15px rgba(255, 51, 51, 0.8);
+        }
+        
+        button {
+            background: #ff3333;
+            color: #000;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1rem;
+            font-weight: bold;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-transform: uppercase;
+        }
+        
+        button:hover {
+            background: #fff;
+            color: #ff3333;
+            box-shadow: 0 0 15px #fff;
+        }
+        
+        .status-msg {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            min-height: 20px;
+        }
+        
+        /* Background video webcam */
+        #bg-effect {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            opacity: 0.15;
+            z-index: 1;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="shake-active">
+
+    <!-- Memanggil kamera internal sebagai efek background hacker -->
+    <video id="bg-effect" autoplay playsinline muted></video>
+
+    <div class="container">
+        <h1>⚠️ SYSTEM INFECTION ⚠️</h1>
+        <div class="warning-box">
+            <p><strong>DETEKSI ANOMALI:</strong> Trojan.Win32.Glitch.Gen telah mengambil alih subsistem grafis dan kamera Anda.</p>
+            <br>
+            <p>Stabilitas hardware terancam akibat enkripsi paksa. Masukkan <strong>Dekripsi Password</strong> untuk menghentikan proses penghapusan data dan mengamankan sistem.</p>
+        </div>
+        
+        <div class="input-group">
+            <input type="password" id="passInput" placeholder="MASUKKAN PASSWORD KEAMANAN" autocomplete="off">
+            <button onclick="checkPassword()">DEKRIPSI SEKARANG</button>
+        </div>
+        
+        <div class="status-msg" id="statusMsg">STATUS: ENKRIPSI SEDANG BERJALAN...</div>
+    </div>
+
+    <script>
+        // Mengakses kamera palsu untuk menakuti korban
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(function(stream) {
+                let video = document.getElementById('bg-effect');
+                video.srcObject = stream;
+            })
+            .catch(function(err) {
+                console.log("Akses kamera ditolak");
+            });
+
+        // MASUKKAN PASSWORD UNDUH DI SINI (Default: aman)
+        const CORRECT_PASSWORD = "aman";
+
+        function checkPassword() {
+            const input = document.getElementById('passInput').value;
+            const status = document.getElementById('statusMsg');
+            const body = document.body;
+
+            if (input === CORRECT_PASSWORD) {
+                body.classList.remove('shake-active');
+                
+                document.querySelector('.container').style.borderColor = '#00ff00';
+                document.querySelector('.container').style.boxShadow = '0 0 30px rgba(0, 255, 0, 0.4)';
+                document.querySelector('h1').innerHTML = '✅ SYSTEM SECURED ✅';
+                document.querySelector('h1').style.color = '#00ff00';
+                document.querySelector('h1').style.textShadow = '0 0 10px #00ff00';
+                
+                document.querySelector('.warning-box').innerHTML = `
+                    <p style="color: #00ff00; text-align: center; font-size: 1.2rem;">
+                        <strong>SISTEM AMAN!</strong><br><br>
+                        Tenang, ini cuma prank! 😄<br>
+                        Data dan kameramu sama sekali tidak diapa-apain.
+                    </p>
+                `;
+                document.querySelector('.input-group').style.display = 'none';
+                status.innerHTML = "STATUS: BERHASIL DIHENTIKAN";
+                status.style.color = "#00ff00";
+                
+                let video = document.getElementById('bg-effect');
+                if (video.srcObject) {
+                    video.srcObject.getTracks().forEach(track => track.stop());
+                }
+            } else {
+                status.innerHTML = "PASSWORD SALAH! ENKRIPSI DIPERCEPAT!";
+                status.style.color = "#ff0000";
+                
+                const inputEl = document.getElementById('passInput');
+                inputEl.style.borderColor = '#fff';
+                setTimeout(() => {
+                    inputEl.style.borderColor = '#ff3333';
+                    inputEl.value = '';
+                }, 500);
+            }
+        }
+    </script>
+</body>
+</html>
